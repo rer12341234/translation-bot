@@ -199,6 +199,9 @@ def process_pdf(input_path, output_path):
 
 def upload_to_google_drive(file_path):
     gauth = GoogleAuth()
+    import os
+gauth.credentials = GoogleAuth.load_credentials_from_json(os.getenv("GOOGLE_CREDENTIALS"))
+if gauth.credentials is None:
     gauth.ServiceAuth()
     drive = GoogleDrive(gauth)
 
