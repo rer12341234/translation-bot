@@ -199,13 +199,9 @@ def process_pdf(input_path, output_path):
 
 def upload_to_google_drive(file_path):
     gauth = GoogleAuth()
-    import os
-gauth.credentials = GoogleAuth.load_credentials_from_json(os.getenv("GOOGLE_CREDENTIALS"))
-if gauth.credentials is None:
-   import os
-gauth.credentials = GoogleAuth.load_credentials_from_json(os.getenv("GOOGLE_CREDENTIALS"))
-if gauth.credentials is None:
-    gauth.ServiceAuth()
+    gauth.credentials = GoogleAuth.load_credentials_from_json(os.getenv("GOOGLE_CREDENTIALS"))
+    if gauth.credentials is None:
+        gauth.ServiceAuth()
     drive = GoogleDrive(gauth)
 
     folder_name = "Translated Books"
@@ -230,7 +226,6 @@ if gauth.credentials is None:
     if os.path.exists(compressed_path):
         os.remove(compressed_path)
     return link
-
 def handle_document(update: Update, context: CallbackContext):
     user = update.message.from_user
     file = update.message.document.get_file()
