@@ -202,6 +202,9 @@ def upload_to_google_drive(file_path):
     import os
 gauth.credentials = GoogleAuth.load_credentials_from_json(os.getenv("GOOGLE_CREDENTIALS"))
 if gauth.credentials is None:
+   import os
+gauth.credentials = GoogleAuth.load_credentials_from_json(os.getenv("GOOGLE_CREDENTIALS"))
+if gauth.credentials is None:
     gauth.ServiceAuth()
     drive = GoogleDrive(gauth)
 
