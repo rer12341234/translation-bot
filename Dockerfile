@@ -1,7 +1,16 @@
 FROM python:3.9-slim
+
 WORKDIR /app
+
+# تثبيت التبعيات اللازمة لـ PyMuPDF
+RUN apt-get update && apt-get install -y \
+    libmupdf-dev \
+    libfreetype6-dev \
+    libjpeg-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-RUN apt-get update && apt-get install -y libmupdf-dev
+
 COPY . .
 CMD ["python", "bot.py"]
